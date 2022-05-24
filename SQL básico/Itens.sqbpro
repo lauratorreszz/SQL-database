@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/fri0199289/Desktop/Itens.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1157"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,8:mainProdutos"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE Produtos 
+(
+ID_nf INT, 
+ID_item INT, 
+Cod_prod INT, 
+Valor_unit NUMERIC(8,2), 
+Quantidade INT, 
+Desconto INT
+)
+
+INSERT INTO Produtos(ID_nf, ID_item, Cod_prod, Valor_unit, Quantidade, Desconto)
+VALUES(1, 1, 1, 25.00, 10, 5) 
+
+INSERT INTO Produtos(ID_nf, ID_item, Cod_prod, Valor_unit, Quantidade)
+VALUES(1, 2, 2, 13.50, 3), 
+	  (1, 3, 3, 15.00, 2), 
+	  (1, 4, 4, 10.00, 1),
+	  (1, 5, 5, 30.00, 1), 
+	  (2, 1, 3, 15.00, 4), 
+	  (2, 2, 4, 10.00, 5), 
+	  (2, 3, 5, 30.00, 7), 
+	  (3, 1, 1, 25.00, 5), 
+	  (3, 2, 4, 10.00, 4), 
+	  (3, 3, 5, 30.00, 5), 
+	  (3, 4, 2, 13.50, 7); 
+	  
+INSERT INTO Produtos(ID_nf, ID_item, Cod_prod, Valor_unit, Quantidade, Desconto)
+VALUES(4, 1, 5, 30.00, 10, 15), 
+	  (4, 2, 4, 10.00, 12, 5), 
+	  (4, 3, 1, 25.00, 13, 5), 
+	  (4, 4, 2, 13.50, 15, 5);
+	 
+INSERT INTO Produtos(ID_nf, ID_item, Cod_prod, Valor_unit, Quantidade)	 
+VALUES(5, 1, 3, 15.00, 3), 
+	  (5, 2, 5, 30.00, 6); 
+	  
+INSERT INTO Produtos(ID_nf, ID_item, Cod_prod, Valor_unit, Quantidade, Desconto)
+VALUES(6, 1, 1, 25.00, 22, 15), 
+	  (6, 2, 3, 15.00, 25, 20), 
+	  (7, 1, 1, 25.00, 10, 3), 
+	  (7, 2, 2, 13.50, 10, 4), 
+	  (7, 3, 3, 15.00, 10, 4), 
+	  (7, 4, 5, 30.00, 10, 1);
+	  </sql><sql name="SQL 2">--1. a)
+SELECT ID_nf , ID_item, Cod_prod AS Codigo_do_produto, Valor_unit, Quantidade FROM Produtos WHERE Desconto IS NULL
+
+--b)
+--obs DESCONTO N TA FUNCIONANDO
+SELECT ID_nf , ID_item, Cod_prod AS Codigo_do_produto, Valor_unit, Quantidade, Desconto, (Valor_unit-(Valor_unit*(Desconto/100))) AS Valor_vendido FROM Produtos WHERE Desconto IS NOT NULL 
+
+--c)
+UPDATE Produtos SET Desconto= 0 WHERE Desconto IS NULL
+
+--d)
+CREATE VIEW vwProdutos AS 
+SELECT ID_nf, ID_item, Cod_prod, Valor_unit, Quantidade*Valor_unit AS Valor_total, Desconto, Valor_unit-(Valor_unit*(Desconto/100)) AS Valor_vendido FROM Produtos
+SELECT * FROM vwProdutos
+
+--e)
+SELECT ID_nf, Quantidade*Valor_unit AS Valor_total  FROM Produtos GROUP BY ID_nf ORDER BY Valor_total DESC
+
+--f)
+SELECT ID_nf, Valor_unit-(Valor_unit*(Desconto/100)) AS Valor_vendido FROM Produtos  GROUP BY ID_nf ORDER BY Valor_vendido DESC
+
+--g) 
+SELECT Max(Quantidade), Cod_prod FROM Produtos GROUP BY Cod_prod
+
+--h) 
+SELECT ID_nf, Cod_prod, Quantidade FROM Produtos WHERE Quantidade&gt;10 GROUP BY ID_nf AND Cod_prod
+
+--i)
+SELECT ID_nf, Quantidade*Valor_unit AS Valor_total FROM Produtos WHERE Valor_total&gt;500 GROUP BY ID_nf ORDER BY Valor_total DESC
+
+--j)
+SELECT Cod_prod, AVG(Desconto) FROM Produtos GROUP BY Cod_prod
+
+--k)
+--terminar 
+SELECT Cod_prod, AVG
+
+</sql><current_tab id="1"/></tab_sql></sqlb_project>
