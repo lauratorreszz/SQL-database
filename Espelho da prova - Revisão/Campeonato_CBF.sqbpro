@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/fri0199289/Desktop/Exercícios - SQL/Campeonato_CBF.db" readonly="0" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="0" synchronous="1"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1431"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:mainJogadores"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Clubes" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="58"/><column index="2" value="103"/><column index="3" value="102"/><column index="4" value="82"/><column index="5" value="89"/><column index="6" value="183"/><column index="7" value="163"/><column index="8" value="82"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Jogadores" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="80"/><column index="2" value="92"/><column index="3" value="64"/><column index="4" value="40"/><column index="5" value="45"/><column index="6" value="79"/><column index="7" value="78"/><column index="8" value="40"/><column index="9" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE Jogadores 
+(
+ID_jogador INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+Nome       VARCHAR(100), 
+Apelido    VARCHAR(50), 
+Sexo       CHAR(1),
+Idade      INT(2), 
+Nome_time  VARCHAR(100), 
+Posicao    VARCHAR(50), 
+UF         VARCHAR(2),
+Gols       INT 
+) 
+   
+ INSERT INTO Jogadores(Nome, Apelido, Sexo, Idade, Nome_time, Posicao, UF, Gols)
+ VALUES('Edu', 'Dudu', 'M', 30, 'Brusque', 'Atacante', 'RJ', 16),
+       ('Léo Gamalho', 'Gamalho', 'M', 32, 'Coritiba', 'Atacante', 'SE', 16), 
+	   ('Rafael Navarro', 'Navarro', 'M', 22, 'Botafogo', 'Atacante', 'RJ', 14), 
+	   ('Cano', 'Cano', 'M', 30, 'Vasco', 'Atacante', 'RJ', 11), 
+	   ('Jean Carlos', 'Jean', 'M', 27, 'Náutico', 'Meia-central', 'RR', 11),
+	   ('Bruno Sávio', 'Savinho', 'M', 33, 'Guarani', 'Atacante', 'MG', 11), 
+	   ('Dellatorre', 'Dela', 'M', 28, 'CSA', 'Atacante', 'ES', 11), 
+	   ('Alef Manga', 'Manga', 'M', 19, 'Goiás', 'Meia-central', 'ES', 10), 
+	   ('Régis', 'Reginho', 'M', 21, 'Guarani', 'Atacante', 'RS', 9),
+	   ('Waguininho', 'Waguinho', 'M', 24, 'Coritiba', 'Atacante', 'PR', 9);</sql><sql name="SQL 2">CREATE TABLE Juiz
+(
+Matricula INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+Nome       VARCHAR(100), 
+Sexo       CHAR(1),
+Idade      INT(2), 
+UF         VARCHAR(2),
+QTD_Jogos  INT 
+) 
+
+INSERT INTO Juiz(Nome, Sexo, Idade, UF, QTD_Jogos)
+VALUES('Igor Júnior Benevenuto de Oliveira', 'M', 45, 'MG', 10), 
+      ('José Cláudio Rocha Filho', 'M',	38,	'SP', 2), 
+      ('Rodrigo DAlonso Ferreira',	'M', 42, 'SC', 7), 
+	  ('Rodrigo Guarizo Ferreira do Amaral', 'M', 34, 'SP', 8), 
+	  ('Rodrigo Nunes de Sá', 'M', 28,  'SP', 5),
+	  ('Wagner Reway', 'M',	37,	'PB', 3),
+	  ('Anderson Daronco', 'M',	43,	'RS', 1), 
+	  ('Daiane Caroline Muniz dos Santos', 'F', 40,	'MS', 6),
+      ('Deborah Cecília Cruz Correia', 'F',	38,	'PE', 6),
+      ('Edina Alves Batista', 'F', 26, 'SP', 7);
+</sql><sql name="SQL 3">CREATE TABLE Clubes
+(
+ID_time INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+Nome_do_time         VARCHAR(100), 
+Ano_fundacao      INT,
+Abreviacao        VARCHAR(5),
+QTD_Atletas       INT,
+Email             VARCHAR(30),
+Site              VARCHAR(50),
+QTD_Socios        INT 
+) 
+
+INSERT INTO Clubes(Nome_do_time, Ano_fundacao, Abreviacao, QTD_Atletas, Site, Email, QTD_Socios)
+VALUES('Botafogo', 1904	,'BFR', 22, 'www.soubotafogo.com.br', 'contato@soubotafogo.com.br',	100000),
+      ('Náutico',  1909, 'NA', 20,	'www.nauticofc.com.br', 'contato@nautico.com', 7000),
+      ('Guarani', 1907,	'GUA', 24, 	'www.guarani.com.br',	'contato@guarani.com.br', 60000),
+      ('Goiás',	1909, 'GO', 28,	'www.goiais.com.br', 'contato@goiais.com.br', 30000),
+      ('Vitória', 1902,	'VIT', 22, 'www.vitoria.com.br', 'contato@vitoria.com.br', 12000),
+      ('CSA', 1921,	'CSA', 24, 'www.csafc.com.br', 'contato@csafc.com.br', 30000), 
+      ('Avaí', 1950, 'AAC',	21, 'www.avai.com.br', 'contato@avai.com', 40000),
+      ('Vasco',	1913, 'VFR', 24, 'www.vascodagama.com.br', 'contato@vascodagama.com.br', 80000), 
+      ('Brusque', 1920,	'BFC', 21, 'www.brusque.com.br', 'contato@brusque.com.br', 20000),
+      ('Operário', 1912, 'OFC', 20,	'www.operario.com.br', 'contato@operario.com.br', 10000);</sql><sql name="SQL 5">--1. 
+SELECT * fROM Jogadores
+SELECT * FROM Juiz
+SELECT * FROM Clubes
+
+--2. 
+SELECT Nome, Idade fROM Jogadores WHERE Nome_time = 'Botafogo'
+
+--3. 
+SELECT Nome, UF FROM Jogadores WHERE Idade&gt;21
+
+--4. 
+SELECT Nome FROM Juiz WHERE UF='SP'
+
+--5.
+SELECT Nome_time FROM Clubes WHERE QTD_Socios&gt;20000
+
+--6. 
+SELECT * FROM Jogadores WHERE Gols&gt;10 AND Idade&gt;25
+
+--7. 
+SELECT * FROM Jogadores WHERE Gols&gt;8 OR Nome_time='Botafogo'
+
+--8. 
+SELECT * FROM Juiz WHERE Idade&gt;35 AND UF='RJ' AND QTD_Jogos&gt;5
+
+--9. 
+SELECT * FROM Juiz ORDER BY Nome ASC
+
+--10. 
+SELECT * FROM Clubes WHERE Nome_do_time LIKE 'G%'
+
+--11. 
+SELECT * FROM Clubes WHERE Email LIKE '%.com.br'
+
+--12.
+SELECT * FROM Clubes WHERE Abreviacao LIKE '%a'
+
+--13. 
+SELECT * FROM Clubes WHERE QTD_Socios BETWEEN 40000 AND 60000
+
+--14. 
+SELECT J.ID_jogador, J.Nome_time, C.ID_time, C.Nome_do_time FROM Jogadores AS J INNER JOIN Clubes AS C ON (J.Nome_time = C.Nome_do_time);
+
+</sql><current_tab id="3"/></tab_sql></sqlb_project>
