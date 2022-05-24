@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/fri0199289/Desktop/Exercícios - SQL/Atividade 7.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1278"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,10:mainEmpregados"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Departamento" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="70"/><column index="2" value="81"/><column index="3" value="67"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Empregados" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="112"/><column index="2" value="122"/><column index="3" value="52"/><column index="4" value="77"/><column index="5" value="107"/><column index="6" value="70"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Produtos_precos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="82"/><column index="2" value="45"/><column index="3" value="79"/><column index="4" value="63"/><column index="5" value="63"/><column index="6" value="63"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="sqlite_sequence" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="43"/><column index="2" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE Empregados 
+(
+Cod_funcionario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
+Nome            VARCHAR(30), 
+Salario         NUMERIC(8,2), 
+Data_nasc       DATE, 
+Data_admissao   DATE
+)
+
+
+INSERT INTO Empregados(Nome, Salario, Data_nasc, Data_admissao)
+VALUES('Laura Torres', 2000, '05/11/2005', '20/10/2020'),
+      ('José Pedro', 2000, '03/10/2004','20/10/2020'),
+      ('Clara Emerick', 2000, '06/04/2006','20/10/2020'),
+      ('Ana Júlia', 2000, '13/04/2005', '20/10/2020'),
+	  ('Bianca Almeida', 2000, '09/10/2005','20/10/2020'),
+	  ('Maria de Souza', 7000, '02/06/1990', '25/08/2019'),
+	  ('Mariana Soraia', 10000, '17/02/1989', '12/05/2005'),
+	  ('Letícia', 2500, '24/07/1999', '14/03/2007');
+	  
+CREATE TABLE Produtos_precos 
+(  
+ ID_produto INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,  
+ Preco NUMERIC(9,2),  
+ Desc_vista NUMERIC(4,2), 
+ Desc_30 NUMERIC(4,2),  
+ Desc_60 NUMERIC(4,2),  
+ Desc_90 NUMERIC(4,2)  
+)  
+
+INSERT INTO Produtos_precos(Preco, Desc_vista ,Desc_30,Desc_60,Desc_90) 
+VALUES (30.00, 10.00, 7.00, 5.00, 3.00)
+
+INSERT INTO Produtos_precos(Preco,Desc_30,Desc_60,Desc_90) 
+VALUES (30.00, 7.00, 5.00, 3.00)
+
+INSERT INTO Produtos_precos(Preco,Desc_90) 
+VALUES (30.00, 3.00)
+
+INSERT INTO Produtos_precos(Preco) 
+VALUES (30.00)</sql><sql name="SQL 2">SELECT * FROM Empregados WHERE Nome = 'Maria'  
+
+-- LIKE  
+SELECT * FROM Empregados WHERE Nome LIKE 'Maria%' -- nomes que começam por Maria
+SELECT * FROM Empregados WHERE Nome LIKE 'Ma%' -- nomes que começam por Ma
+SELECT * FROM Empregados WHERE Nome LIKE 'M%' -- nomes que começam por M  
+SELECT * FROM Empregados WHERE Nome LIKE '%Maria' -- nomes que terminam por Maria
+SELECT * FROM Empregados WHERE Nome LIKE '%s' -- nomes que terminam com S
+SELECT * FROM Empregados WHERE Nome LIKE '%za' -- nomes que terminam por za
+
+
+SELECT * FROM Empregados WHERE Nome LIKE '%maria%' -- nomes contendo maria
+SELECT * FROM Empregados WHERE Nome LIKE '%a%' -- nomes contendo A
+SELECT * FROM Empregados WHERE Nome NOT LIKE '%s%' -- nomes que não têm S
+SELECT * FROM Empregados WHERE Nome LIKE '%bi%' -- nomes contendo bi
+
+-- Nomes que comecem por qualquer caractere e o segundo seja a letra A 
+SELECT * FROM Empregados WHERE Nome LIKE '_a%'  
+
+-- Nomes cuja penultima letra seja Z  
+SELECT * FROM Empregados WHERE Nome LIKE '%Z_'  
+
+
+SELECT * FROM Empregados WHERE Nome LIKE 'MA_IA%'  
+
+-- Nomes que terminem com LU seguido de 3 letras quaisquer  
+SELECT * FROM Empregados WHERE Nome LIKE '%LU___'  
+
+SELECT * FROM Empregados WHERE Nome LIKE '%SOU[SZ]A%' -- nomes contendo SOUZA ou SOUSA  
+SELECT * FROM Empregados WHERE Nome LIKE '%JOS[EÉ]%' -- nomes contendo JOSE ou JOSÉ  
+
+-- Nomes que não contenham a palavra MARIA  
+SELECT * FROM Empregados WHERE Nome NOT LIKE '%MARIA%'  
+
+-- Nomes que não contenham a sílaba MA 
+SELECT * FROM Empregados WHERE Nome NOT LIKE '%MA%'  
+
+-- NULL e NOT NULL  
+SELECT * FROM Empregados WHERE Data_nasc IS NULL  
+SELECT * FROM Empregados WHERE Data_nasc IS NOT NULL  
+</sql><sql name="SQL 3">SELECT * FROM Produtos_precos 
+
+SELECT ID_produto, Preco * (1 - Desc_vista/100) A_PAGAR  FROM Produtos_precos 
+-- 
+SELECT ID_produto, Preco * (1 - ISNULL(Desc_vista, 0)/100) A_PAGAR  FROM Produtos_precos 
+-- 
+SELECT ID_produto, Preco * (1 - COALESCE(Desc_vista, Desc_30, Desc_60, Desc_90, 0)/100) A_PAGAR  FROM Produtos_precos
+
+SELECT Cod_funcionario, Nome, ISNULL(Cod_dept,-1) AS DEPTO, ISNULL(SALARIO,-1) AS Renda FROM Empregados  
+
+SELECT CODFUN, NOME, ISNULL(DATA_NASCIMENTO,'1900.1.1') AS DATA_NASC FROM Empregados  
+
+SELECT CODCLI, NOME, COALESCE(EST_COB,ESTADO,'NC') AS EST_COBRANCA FROM CLIENTES  ORDER BY 3  
+
+-- Operador IN (está contido)  
+SELECT * FROM EMPREGADOS WHERE COD_DEPTO IN (1,3,4,7) ORDER BY COD_DEPTO  
+-- 
+SELECT NOME, ESTADO FROM CLIENTES WHERE ESTADO IN ('AM', 'PR', 'RJ', 'SP')  
+-- 
+SELECT NOME, ESTADO FROM CLIENTES WHERE ESTADO NOT IN ('AM', 'PR', 'RJ', 'SP') 
+</sql><current_tab id="2"/></tab_sql></sqlb_project>

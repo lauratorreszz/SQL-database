@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/User/Downloads/Exercícios - SQL/Atividade_6_Operadores.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1457"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:mainPedidos"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Pedidos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="83"/><column index="2" value="94"/><column index="3" value="73"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Produtos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="92"/><column index="2" value="161"/><column index="3" value="95"/><column index="4" value="93"/><column index="5" value="83"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE Produtos 
+(
+Cod_produto INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
+Nome            VARCHAR(100), 
+QTD_Real        NUMERIC(15), 
+Preco_venda     NUMERIC(10,2), 
+Cod_pedido        INT,
+FOREIGN KEY(Cod_pedido) REFERENCES Pedidos(Cod_pedido)
+)
+
+INSERT INTO Produtos(Nome, QTD_Real, Preco_venda, Cod_pedido)
+VALUES('Shampoo Restaurador', 100, 25.00, 1),
+      ('Matizador', 280, 300.00, 3),
+      ('Reparador de pontas', 900, 12.50, 4),
+	  ('Condicionador Babosa', 150, 22.99, 5),
+	  ('Silicone capilar', 400, 22.99, 5),
+	  ('Tonalizante Azul', 890, 50.75, 6), 
+	  ('Tonalizante Rosa', 750, 51.99, 2), 
+	  ('Tonalizante Roxo', 640, 52.99, 2),
+	  ('Creme de hidratação', 300, 50.00, 1);
+
+--2. 
+SELECT * FROM Produtos WHERE QTD_Real &gt; 5000
+
+--3. 
+SELECT * FROM Produtos WHERE Preco_venda &lt; 0.50
+
+--4. 
+SELECT * FROM Pedidos WHERE VLR_Total &gt; 5000.00
+
+--5. 
+SELECT * FROM Produtos WHERE QTD_Real BETWEEN 500 AND 1000 ORDER BY QTD_Real
+
+--6.
+SELECT * FROM Pedidos WHERE VLR_Total BETWEEN 3000.00 AND 5000.00 ORDER BY VLR_Total
+
+--7.
+SELECT * FROM Produtos WHERE QTD_Real &gt; 300 AND Cod_produto = 6
+
+--8. 
+SELECT * FROM Produtos WHERE QTD_Real &gt; 300 OR Cod_produto = 6
+
+--9. 
+SELECT * FROM Pedidos WHERE VLR_Total &lt; 100.00  OR VLR_Total &gt; 10000.00 ORDER BY VLR_Total
+
+--10. 
+SELECT * FROM Produtos WHERE QTD_Real &lt; 500 OR QTD_Real &gt; 1000 ORDER BY QTD_Real
+
+
+
+</sql><sql name="SQL 2">CREATE TABLE Pedidos
+(
+Cod_pedido INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
+Nome_cliente    VARCHAR(30), 
+VLR_Total      NUMERIC(15)
+)
+
+INSERT INTO Pedidos(Nome_cliente, VLR_Total)
+VALUES('Natielly', 300.00),
+      ('Ana', 500.00),
+      ('Carla', 1500.00),
+      ('Clara', 2300.00),
+	  ('Bianca', 5100.00),
+	  ('Laura', 7000.00);</sql><current_tab id="0"/></tab_sql></sqlb_project>

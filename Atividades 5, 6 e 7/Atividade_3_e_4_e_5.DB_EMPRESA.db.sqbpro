@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/fri0199289/Desktop/Exercícios - SQL/Atividade_3_e_4_e_5.DB_EMPRESA.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1534"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,12:mainDepartamento"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Departamento" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="70"/><column index="2" value="110"/><column index="3" value="67"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Empregados" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="112"/><column index="3" value="52"/><column index="4" value="77"/><column index="5" value="107"/><column index="6" value="70"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Func_dependentes" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="83"/><column index="2" value="64"/><column index="3" value="46"/><column index="4" value="77"/><column index="5" value="70"/><column index="6" value="67"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE Empregados 
+(
+Cod_funcionario INT  IDENTITY PRIMARY KEY, 
+Nome            VARCHAR(30), 
+Salario         NUMERIC(8,2), 
+Data_nasc       DATE, 
+Data_admissao   DATE, 
+Cod_dept        INT,
+FOREIGN KEY(Cod_dept) REFERENCES Departamento(Cod_dept)
+)
+
+INSERT INTO Empregados(Nome, Salario, Data_nasc, Data_admissao)
+VALUES('Laura Torres', 2000, '05/11/2005', '20/10/2020'),
+      ('José Pedro', 2000, '03/10/2004','20/10/2020'),
+      ('Clara Emerick', 2000, '06/04/2006','20/10/2020'),
+      ('Ana Júlia', 2000, '13/04/2005', '20/10/2020'),
+	  ('Bianca Almeida', 2000, '09/10/2005','20/10/2020');</sql><sql name="SQL 2">CREATE TABLE Departamento 
+(
+Cod_dept INT IDENTITY PRIMARY KEY, 
+Nome_dept   VARCHAR(30), 
+SN_Ativo    VARCHAR(1)
+)
+
+INSERT INTO Departamento(Nome_dept, SN_Ativo)
+VALUES('Ciências sociais', 'N'),
+      ('Exatas', 'S'),
+	  ('Ciências humanas', 'S');
+
+</sql><sql name="SQL 3">CREATE TABLE Func_dependentes 
+(
+Cod_cliente   INT, 
+Cod_dep       INT, 
+Nome          VARCHAR(30), 
+Data_nasc     DATE, 
+Grau_dep      VARCHAR(1), 
+SN_Ativo      VARCHAR(1), 
+PRIMARY KEY(Cod_cliente, Cod_dep)
+)
+
+INSERT INTO Func_dependentes(Nome, Data_nasc, Grau_dep, SN_Ativo)
+VALUES('Carla','05/11/2005', '0', 'S'),
+      ('José',  '03/10/2004','0', 'N'),
+      ('Maria', '06/04/2006','0', 'N'),
+      ('Ana', '13/04/2005', '1', 'S'),
+	  ('Beatriz', '09/10/2005','0', 'S');</sql><sql name="SQL 4">--1. Os comandos abaixo mostram todas as colunas das tabelas, com todos seus campos e dados inseridos
+SELECT * FROM Empregados
+SELECT * FROM Departamentos
+SELECT * FROM Func_dependentes
+
+--2. O comando mostra apenas as colunas Cod_funcionario, Nome e Salario da tabela Empregados, com seus dados inseridos nos seus campos. 
+SELECT Cod_funcionario, Nome, Salario FROM Empregados 
+
+--2.1 O comando mostra apenas as colunas Cod_dept e Nome_dept da tabela Departamento com seus dados inseridos nos seus campos. 
+SELECT Cod_dept, Nome_dept FROM Departamento
+
+--3. O código abaixo apresenta as colunas Cod_funcionario, Nome e Salario da tabela Empregados
+--e também uma nova coluna chamada Salario_com_reajuste, que mostra os salários com adição de 20% de seu valor 
+SELECT Cod_funcionario, Nome, Salario, Salario * 1.2 AS Salario_com_reajuste FROM Empregados
+
+SELECT Cod_funcionario, Nome, 
+       DATENAME(WEEKDAY, Data_nasc) AS DIA_SEMANA_NASCIMENTO, 
+	   LEFT(Nome,1) AS PRIM_LETRA_NOME FROM Empregados 
+ SELECT Salario FROM Empregados
+ 
+ --4. Aparece as tabelas Cod_funcionario, Nome e Salario da tabela Empregados com seus nomes adaptados 
+ --e também uma nova coluna com os salários com adicional de 20%
+ SELECT Cod_funcionario AS Código, Nome AS Nome, Salario as Salário,
+        Salario * 1.2 AS [Salário com 20%]
+		FROM Empregados
+		
+--5. Os comandos ordenam as colunas das tabelas de acordo com o que é solicitado. 
+SELECT * FROM Empregados ORDER BY Nome 
+--No comando abaixo, os nomes estão na ordem alfabética tradicional. 
+SELECT * FROM Empregados ORDER BY Nome ASC 
+--Já nesse comando, os nomes estão na ordem alfabética invertida, pois é empregado o DESC (descendente). 
+SELECT * FROM Empregados ORDER BY Nome DESC
+--A mesma lógica ocorre com os comandos abaixo, porém em DESC aparece os menores salários para os maiores, e em ASC aparece os maiores para os menores. 
+SELECT * FROM Empregados ORDER BY Salario DESC 
+
+--6. O comando limit define quais linhas de uma tabela serão mostradas. 
+--Por exemplo, o comando abaixo apresenta as duas primeiras linhas da tabela empregados. 
+SELECT * FROM Empregados limit 2
+</sql><current_tab id="3"/></tab_sql></sqlb_project>
